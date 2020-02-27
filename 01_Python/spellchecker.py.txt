@@ -1,0 +1,27 @@
+import sys
+
+vocab = {}
+
+fd = open('wiki.hist', 'r+')
+for line in fd.readlines():
+    if line.strip() != "":
+        try:
+            (freq, word) = line.strip().split(' ')
+            vocab[word] = freq
+        except:
+            pass
+fd.close()
+
+form = []
+
+
+
+for line in sys.stdin.readlines():
+    sent = line.split(' ')
+    for word in sent:
+        word = word.replace('\n', '')
+        if word not in vocab:
+            print('*' + word, end=' ')
+        else:
+            print(word, end=' ')
+print('\n')
